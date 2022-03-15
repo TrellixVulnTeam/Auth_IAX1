@@ -47,29 +47,28 @@ const LoginSlice=createSlice({
       console.log(e.response?.data?.message);
     }
   },
-    
-  checkAuth: async (state) => {
-    try {
-      const response = await axios.get(`http://localhost:5000/api/refresh`, { withCredentials: true })//авторизован ли пользователь 
-      localStorage.setItem('token', response.data.accessToken);
-      state.auth=true;
-      state.user=response.data.user
-    }
-    catch (e) {
-      console.log(e.response?.data?.message)
-    }
+  // checkAuth:async(state) => {
+  //   try {
+  //     const response = await axios.get(`http://localhost:5000/api/refresh`, { withCredentials: true })//авторизован ли пользователь 
+  //     console.log(response)
+  //     localStorage.setItem('token', response.data.accessToken);
+  //     state.auth=true;
+  //     state.user=response.data.user
+  //   }
+  //   catch (e) {
+  //     console.log(e.response?.data?.message)
+  //   }
+  // }
   }
-
-  }
-
 })
 
 const {actions, reducer} = LoginSlice;
 
 export default reducer;
+
 export const {
    loginUser,
    registrationUser,
    logout,
-   checkAuth
+  //  checkAuth
 } = actions;
