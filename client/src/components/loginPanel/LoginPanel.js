@@ -2,7 +2,7 @@ import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-
+import './LoginPanel.css'
 import { loginUser,registrationUser } from './LoginSlice';
 
 const LoginPanel = () => {
@@ -32,11 +32,18 @@ const LoginPanel = () => {
 
   return (
     <>
-    <input onChange={(e)=>setEmail(e.target.value)} value={email} type='email' placeholder='Email'  />
-    <input onChange={(e) => setPassword(e.target.value)} value={password} type='password' placeholder='Password' />
+      <div class="text-field">
+        <label class="text-field__label">Email</label>
+        <input onChange={(e) => setEmail(e.target.value)} class="text-field__input" type="email"  placeholder="Email" value={email}/>
+      </div>
       
-    <button onClick={()=>login(email,password)}>Login</button>
-    <button onClick={()=>registration(email,password)}>Registration</button>
+      <div class="text-field">
+          <label class="text-field__label">Пароль</label>
+          <input onChange={(e) => setPassword(e.target.value)} class="text-field__input" type="password"  placeholder="*****" value={email}/>
+      </div>
+    
+      <Button onClick={() => login(email, password)} variant="outline-success">Login</Button>{' '}
+      <Button onClick={() => registration(email, password)} variant="outline-success">Registration</Button>{' '}
     </>
   )
 }
