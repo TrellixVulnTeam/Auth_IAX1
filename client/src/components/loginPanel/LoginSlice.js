@@ -1,6 +1,6 @@
 import AuthService from '../../services/AuthService'
 import axios from 'axios'
-import {createSlice} from "@reduxjs/toolkit"
+import {createSlice,createAsyncThunk} from "@reduxjs/toolkit"
 
 const initialState = {
   email:'',
@@ -9,6 +9,14 @@ const initialState = {
   user:{}
 }
 
+
+export const checkAuth = createAsyncThunk(
+  'heroes/checkAuth',
+  async () => {
+      const response= await axios.get(`http://localhost:5000/api/refresh`, { withCredentials: true })
+      return  response
+  }
+);
 const LoginSlice=createSlice({
   name:'login',
   initialState,
@@ -47,19 +55,21 @@ const LoginSlice=createSlice({
       console.log(e.response?.data?.message);
     }
   },
-  // checkAuth:async(state) => {
-  //   try {
-  //     const response = await axios.get(`http://localhost:5000/api/refresh`, { withCredentials: true })//авторизован ли пользователь 
-  //     console.log(response)
-  //     localStorage.setItem('token', response.data.accessToken);
-  //     state.auth=true;
-  //     state.user=response.data.user
-  //   }
-  //   catch (e) {
-  //     console.log(e.response?.data?.message)
-  //   }
-  // }
-  }
+  },
+  extraReducers: (builder) => {
+    builder
+        .addCase(checkAuth.fulfilled, (state, action) => {
+          // console.log(action)
+          localStorage.setItem('token', action.payload.data.accessToken);
+          console.log(`action.data.accessToken=${action.payload.data.accessToken}`)
+          state.auth=true;
+          state.user=action.payload.data.user 
+        })
+        .addCase(checkAuth.rejected, (state,action) => {
+            console.log('error')
+        })
+        .addDefaultCase(() => {})
+}
 })
 
 const {actions, reducer} = LoginSlice;
@@ -70,5 +80,4 @@ export const {
    loginUser,
    registrationUser,
    logout,
-  //  checkAuth
 } = actions;

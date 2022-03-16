@@ -8,12 +8,8 @@ import { loginUser,registrationUser } from './LoginSlice';
 const LoginPanel = () => {
   const [email,setEmail]=useState('')
   const [password, setPassword] = useState('')
-  // const [auth, setAuth] = useState(false)
-  
-
   const dispatch=useDispatch()
  
-  
   const  login=(email,password)=>{
     const User = {
       email,
@@ -44,4 +40,4 @@ const LoginPanel = () => {
     </>
   )
 }
-export default LoginPanel
+export default LoginPanel;
