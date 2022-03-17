@@ -58,7 +58,7 @@ const LoginPanel = () => {
     
       {/* <Button onClick={() => login(email, password)} variant="outline-success" >Login</Button>{' '} */}
       <Button onClick={() => registration(email, password)} variant="outline-success" type='submit'>Registration</Button>{' '}
-      <Button variant="outline-success"><NavLink  style={({isActive})=>({color:isActive?'#9f0013':'inherit'})} to="/">HomePage</NavLink></Button>{' '}
+      <NavLink  style={({isActive})=>({color:isActive?'#9f0013':'inherit'})} to="/"><Button variant="outline-success">HomePage</Button>{' '}</NavLink>
     </>
   )
 }

@@ -39,6 +39,8 @@ const LoginSlice=createSlice({
       localStorage.setItem('token', response.data.accessToken);
       state.auth=true;
       state.user=response.data.user
+      console.log(`auth in store ${state.auth}`)
+      
     }
     catch (e) {
       console.log(e.response?.data?.message);
@@ -59,7 +61,6 @@ const LoginSlice=createSlice({
   extraReducers: (builder) => {
     builder
         .addCase(checkAuth.fulfilled, (state, action) => {
-          // console.log(action)
           localStorage.setItem('token', action.payload.data.accessToken);
           console.log(`action.data.accessToken=${action.payload.data.accessToken}`)
           state.auth=true;
