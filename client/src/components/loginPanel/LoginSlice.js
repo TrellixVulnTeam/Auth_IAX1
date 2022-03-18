@@ -39,8 +39,7 @@ const LoginSlice=createSlice({
       localStorage.setItem('token', response.data.accessToken);
       state.auth=true;
       state.user=response.data.user
-      console.log(`auth in store ${state.auth}`)
-      
+
     }
     catch (e) {
       console.log(e.response?.data?.message);

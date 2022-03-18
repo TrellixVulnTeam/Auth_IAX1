@@ -1,24 +1,32 @@
 import Button from 'react-bootstrap/Button'
 import { useEffect,useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector,getState } from 'react-redux';
 import './LoginPanel.css'
 import { checkAuth,loginUser,registrationUser } from './LoginSlice';
 import {NavLink } from "react-router-dom";
-
+import store from '../../store/index'
 const LoginPanel = () => {
 
   const [email,setEmail]=useState('')
   const [password, setPassword] = useState('')
   const dispatch=useDispatch()
-  const {auth,user} = useSelector(store => store.login);
-  
+  const {auth} = useSelector(store => store.login);
+  const [isAuth,setIsAuth]=useState(auth)
+  const [user,setUser]=useState('')
 
   useEffect(()=>{
     if(localStorage.getItem('token')){
       dispatch(checkAuth())
     }
   },[])
-  
+  const StateUpdate=()=>{
+    const obj=(store.getState().login)
+    obj.then(val=>{
+      console.log(val)
+      setIsAuth(val.auth)
+      setUser(val.user.email)
+    })
+  }
   const  login=(email,password)=>{
     const User = {
       email,
@@ -35,13 +43,12 @@ const LoginPanel = () => {
       password,
     }
     dispatch(registrationUser(User))
-
-    console.log(`auth=${auth}`)
+    StateUpdate()
     setEmail('')
     setPassword('')
   }
 
-  const content=auth ? ` Пользователь ${user.email} авторизован `:`АВТОРИЗУЙТЕСЬ`;
+  const content=isAuth ? ` Пользователь ${user} авторизован `:`АВТОРИЗУЙТЕСЬ`;
 
   return (
     <>
