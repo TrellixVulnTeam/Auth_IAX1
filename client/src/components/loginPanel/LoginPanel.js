@@ -4,29 +4,24 @@ import { useDispatch, useSelector,getState } from 'react-redux';
 import './LoginPanel.css'
 import { checkAuth,loginUser,registrationUser } from './LoginSlice';
 import {NavLink } from "react-router-dom";
-import store from '../../store/index'
+import Spinner from 'react-bootstrap/Spinner'
+
+
 const LoginPanel = () => {
 
   const [email,setEmail]=useState('')
   const [password, setPassword] = useState('')
+  const [spin,setSpin]=useState(false)
   const dispatch=useDispatch()
-  const {auth} = useSelector(store => store.login);
-  const [isAuth,setIsAuth]=useState(auth)
-  const [user,setUser]=useState('')
+  const {auth,user,spinner} = useSelector(store => store.login);
+
 
   useEffect(()=>{
     if(localStorage.getItem('token')){
       dispatch(checkAuth())
     }
   },[])
-  const StateUpdate=()=>{
-    const obj=(store.getState().login)
-    obj.then(val=>{
-      console.log(val)
-      setIsAuth(val.auth)
-      setUser(val.user.email)
-    })
-  }
+
   const  login=(email,password)=>{
     const User = {
       email,
@@ -43,16 +38,18 @@ const LoginPanel = () => {
       password,
     }
     dispatch(registrationUser(User))
-    StateUpdate()
+    setSpin(spinner)
+    console.log(`spinner=${spinner}`)
     setEmail('')
     setPassword('')
   }
 
-  const content=isAuth ? ` Пользователь ${user} авторизован `:`АВТОРИЗУЙТЕСЬ`;
+  const content=auth ? ` Пользователь ${user.email} авторизован `:`АВТОРИЗУЙТЕСЬ`;
+  const View=(spin&&!auth)? <Spinner animation="border" /> : content
 
   return (
     <>
-    {content}
+    {View}
       <div className="text-field">
         <label className="text-field__label">Email</label>
         <input onChange={(e) => setEmail(e.target.value)} className="text-field__input" type="email"  placeholder="Email" value={email}/>
