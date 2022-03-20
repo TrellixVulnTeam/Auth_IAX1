@@ -36,17 +36,6 @@ const LoginSlice=createSlice({
   name:'login',
   initialState,
   reducers:{
-    // loginUser:async(state,action)=>{
-    //   try {
-    //     const response = await AuthService.login(action.payload.email, action.payload.password);
-    //     localStorage.setItem('token', response.data.accessToken);
-    //     state.auth=true;
-    //     state.user=response.data.user
-    //   }
-    //   catch (e) {
-    //     console.log(e.response?.data?.message);
-    //   }
-    // },
   logout:async(state)=>{
     try {
       const response = await AuthService.logout();
