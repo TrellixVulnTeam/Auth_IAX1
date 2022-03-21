@@ -7,7 +7,7 @@ const initialState = {
   password:'',
   auth:false,
   user:{},
-  spinner:true
+  spinner:false
 }
 
 
@@ -50,15 +50,23 @@ const LoginSlice=createSlice({
   },
   extraReducers: (builder) => {
     builder
+        .addCase(checkAuth.pending,(state)=>{
+          state.spinner=true;
+        })
         .addCase(checkAuth.fulfilled, (state, action) => {
           localStorage.setItem('token', action.payload.data.accessToken);
           state.auth=true;
+          state.spinner=false;
           state.user=action.payload.data.user 
         })
         .addCase(checkAuth.rejected, (state,action) => {
+            state.spinner=false;
             console.log(action?.error?.message)
         })
 
+        .addCase(registrationUser.pending,(state)=>{
+          state.spinner=true;
+        })
         .addCase(registrationUser.fulfilled, (state,action)=>{
           localStorage.setItem('token',action.payload.data.accessToken );
           state.auth=true;

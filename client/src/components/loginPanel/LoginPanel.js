@@ -11,7 +11,6 @@ const LoginPanel = () => {
 
   const [email,setEmail]=useState('')
   const [password, setPassword] = useState('')
-  const [spin,setSpin]=useState(false)
   const dispatch=useDispatch()
   const {auth,user,spinner} = useSelector(store => store.login);
 
@@ -28,25 +27,30 @@ const LoginPanel = () => {
       password,
     }
     dispatch(registrationUser(User))
-    setSpin(spinner)
-    console.log(`spinner=${spinner}`)
     setEmail('')
     setPassword('')
   }
 
-  const content=auth ? ` Пользователь ${user.email} авторизован `:<h3>Create your account</h3>;
-  const View=(spin&&!auth)? <Spinner animation="border" /> : content
+  const Content=auth ? ` Пользователь ${user.email} авторизован `:<h3>Create your account</h3>;
+  
+  if (spinner){
+    return(
+      <Spinner animation="border" />
+    )
+  }
   if (auth){
     return(
       <>
-          {View}
+          <h2>{user.isActive ? 'Аккаунт активирован ':'Активируйте аккаунт'}</h2>
+          {Content}
          <Button onClick={()=>{dispatch(logout())}} variant="outline-success">Log Out</Button>{' '}
       </>
     )
   }
+
   return (
     <>
-    {View}
+    {Content}
       <div className="text-field">
         <label className="text-field__label">Email</label>
         <input onChange={(e) => setEmail(e.target.value)} className="text-field__input" type="email"  placeholder="Email" value={email}/>
@@ -59,8 +63,8 @@ const LoginPanel = () => {
     
      
       <Button onClick={() => registration(email, password)} variant="outline-success" type='submit'>Sign Up</Button>{' '}
-      <h5>Already have an account ? <NavLink to='/SignIn'>Sign in</NavLink></h5>
-      <NavLink  style={({isActive})=>({color:isActive?'#9f0013':'inherit'})} to="/"><Button variant="outline-success">HomePage</Button>{' '}</NavLink>
+      <h5>Already have an account ? <NavLink to='/'>Sign in</NavLink></h5>
+      <NavLink  style={({isActive})=>({color:isActive?'#9f0013':'inherit'})} to="/Home"><Button variant="outline-success">HomePage</Button>{' '}</NavLink>
     </>
   )
 }

@@ -12,9 +12,9 @@ function App() {
     <Router>
       <div className='App'>
       <Routes>
-        <Route path='/' element={<HomePanel/>}/>
+        <Route path='/' element={<SignInPanel/>}/>
         <Route path='/registration' element={<LoginPanel/>}/>
-        <Route path='/SignIn' element={<SignInPanel/>}/>
+        <Route path='/Home' element={<HomePanel/>}/>
         <Route path='/weather' element={<WeatherList/>}/>
       </Routes>
       </div>
