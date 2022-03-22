@@ -3,7 +3,7 @@ import LoginPanel from '../loginPanel/LoginPanel';
 import SignInPanel from '../signInPanel/signInPanel';
 import HomePanel from '../homePanel/homePanel'
 import { BrowserRouter as Router,Route,Routes} from "react-router-dom";
-import WeatherList from '../weatherList/weatherList';
+import WeatherList from '../weatherList/WeatherList';
 function App() {
 
   
