@@ -1,6 +1,7 @@
 import AuthService from '../../services/AuthService'
 import axios from 'axios'
 import {createSlice,createAsyncThunk} from "@reduxjs/toolkit"
+import useWeatherServices from '../../services/WeatherApi'
 
 const initialState = {
   email:'',
@@ -32,6 +33,7 @@ export const loginUser=createAsyncThunk(
     return response;
   }
 )
+
 const LoginSlice=createSlice({
   name:'login',
   initialState,
@@ -86,6 +88,7 @@ const LoginSlice=createSlice({
           console.log(action?.error?.message)
         })
 
+        
         .addDefaultCase(() => {})
 }
 })

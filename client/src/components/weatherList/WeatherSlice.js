@@ -1,20 +1,17 @@
-import useWeatherServices from '../../services/WeatherApi'
 import {createSlice,createAsyncThunk} from "@reduxjs/toolkit"
-
+import useWeatherServices from '../../services/WeatherApi'
 
 const initialState = {
   data:[],
   city:''
 }
 
+
 export const searchCity=createAsyncThunk(
   'weather/searchCity',
-  async(state,action)=>{
-    console.log('Yes')
+  async(state)=>{
     const {getWeatherByCity}=useWeatherServices();
-    console.log(action)
-    const response= await getWeatherByCity('Erevan')
-    console.log(response)
+    const response= await getWeatherByCity(state)
     return response
   }
 )
@@ -23,28 +20,25 @@ const WeatherSlice=createSlice({
   name:'weather',
   initialState,
   reducers:{
-    // searchCity:async(state)=>{
-    //   try {
-    //     // const response = await AuthService.logout();
-    //     // localStorage.removeItem('token');
-    //     // state.auth=false;
-    //     // state.user={};
-        
-    //   }
-    //   catch (e) {
-    //     console.log(e.response?.data?.message);
-    //   }
-    // },
-  },
-  extraReducers:(builder)=>{
-    builder
-      .addCase(searchCity.fulfilled,(state,action)=>{
-        console.log(action)
-      })
-      .addCase(searchCity.rejected,(state,action)=>{
-        console.log('error')
-      })
+  delCity:(state,action)=>{
+    state.data.filter((item,id)=>(id!==action.payload))
+    console.log('data=',state.data)
   }
+  },
+  extraReducers: (builder) => {
+    builder
+        .addCase(searchCity.pending,(state,action)=>{
+          console.log('Download date city')
+        })
+        .addCase(searchCity.fulfilled,(state,action)=>{
+          state.data.push(action.payload)
+          console.log('action=',action)
+        })
+        .addCase(searchCity.rejected,(state,action)=>{
+          console.log('error')
+        })
+        .addDefaultCase(() => {})
+}
 })
 
 const {actions, reducer} = WeatherSlice;
@@ -52,5 +46,5 @@ const {actions, reducer} = WeatherSlice;
 export default reducer;
 
 export const {
-  //  searchCity
+  delCity
 } = actions;

@@ -2,7 +2,7 @@ import Button from 'react-bootstrap/Button'
 import { useEffect,useState } from 'react';
 import { useDispatch, useSelector,getState } from 'react-redux';
 import './LoginPanel.css'
-import { checkAuth,logout,registrationUser } from './LoginSlice';
+import { checkAuth,logout,registrationUser, } from './LoginSlice';
 import {NavLink } from "react-router-dom";
 import Spinner from 'react-bootstrap/Spinner'
 
