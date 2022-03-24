@@ -4,7 +4,8 @@ import useWeatherServices from '../../services/WeatherApi'
 const initialState = {
   data:[],
   cityInfo:{},
-  city:''
+  city:'',
+  allCities:[]
 }
 
 export const searchCity=createAsyncThunk(
@@ -25,12 +26,25 @@ export const weatherInfo=createAsyncThunk(
   }
 )
 
+// export const FirstLoadingCities=createAsyncThunk(
+//   'weather/FirstLoadingCities',
+//   async(state)=>{
+//     const {getWeatherByCity}=useWeatherServices();
+//     for(let i=0;i<state.allCities.length;i++){
+//       const response= await getWeatherByDays(state.)
+//       return response
+//     }
+//   }
+// )
 const WeatherSlice=createSlice({
   name:'weather',
   initialState,
   reducers: {
       delCity: (state, action) => {
           state.data=current(state.data).filter((item,id)=>(id!==action.payload))
+          state.allCities=current(state.allCities).filter((item,id)=>(id!==action.payload))
+          console.log(state.allCities)
+          localStorage.setItem('data',state.allCities)
       }
   },
 
@@ -40,7 +54,9 @@ const WeatherSlice=createSlice({
           console.log('Download date city')
         })
         .addCase(searchCity.fulfilled,(state,action)=>{
-          state.data.push(action.payload)         
+          state.data.push(action.payload)
+          state.allCities.push(action.payload.name)
+          localStorage.setItem('data',current(state.allCities))         
         })
         .addCase(searchCity.rejected,(state,action)=>{
           console.log('error')

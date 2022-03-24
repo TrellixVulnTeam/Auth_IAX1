@@ -12,9 +12,7 @@ const WeatherInfo =({})=>{
   const {city}=useParams()
   const dispatch=useDispatch()
   const {cityInfo} = useSelector(store => store.weather);
-  // const { getWeatherByDays } = useWeatherServices();
-  // const [spinner,setSpinner]=useState(true);
-  // const [data,setData]=useState({});
+  
 
   useEffect(()=>{
     console.log('city=',city)

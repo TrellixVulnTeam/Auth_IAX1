@@ -16,7 +16,7 @@ function App() {
         <Route path='/' element={<SignInPanel/>}/>
         <Route path='/registration' element={<LoginPanel/>}/>
         <Route path='/Home' element={<HomePanel/>}/>
-        <Route path='/weather' element={<WeatherList/>}/>
+        <Route path='/weatherList' element={<WeatherList/>}/>
         <Route path='/:city' element={<WeatherInfo/>}/>
       </Routes>
       </div>
