@@ -1,7 +1,7 @@
 import AuthService from '../../services/AuthService'
 import axios from 'axios'
 import {createSlice,createAsyncThunk} from "@reduxjs/toolkit"
-import useWeatherServices from '../../services/WeatherApi'
+
 
 const initialState = {
   email:'',
@@ -43,6 +43,7 @@ const LoginSlice=createSlice({
       const response = await AuthService.logout();
       localStorage.removeItem('token');
       state.auth=false;
+      console.log(state.auth)
       state.user={};
     }
     catch (e) {

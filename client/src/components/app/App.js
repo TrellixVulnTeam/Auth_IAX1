@@ -4,9 +4,10 @@ import SignInPanel from '../signInPanel/signInPanel';
 import HomePanel from '../homePanel/homePanel'
 import { BrowserRouter as Router,Route,Routes} from "react-router-dom";
 import WeatherList from '../weatherList/WeatherList';
-function App() {
+import WeatherInfo from '../weatherInfo/WeatherInfo';
 
-  
+function App() {
+ 
   return (
     
     <Router>
@@ -16,11 +17,11 @@ function App() {
         <Route path='/registration' element={<LoginPanel/>}/>
         <Route path='/Home' element={<HomePanel/>}/>
         <Route path='/weather' element={<WeatherList/>}/>
+        <Route path='/:city' element={<WeatherInfo/>}/>
       </Routes>
       </div>
     </Router>
     
-
   );
 }
 

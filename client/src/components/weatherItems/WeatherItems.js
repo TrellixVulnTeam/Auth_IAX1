@@ -9,21 +9,10 @@ const WeatherItems=()=>{
   const dispatch=useDispatch()
   const {data}= useSelector(store => store.weather);
   
-  // const {getWeatherByCity}=useWeatherServices();
-
   const cityDelete=(index)=>{
     dispatch(delCity(index))
   }
-
-  // useEffect(()=>{
-
-  // })
-
-  // useEffect(()=>{
-  //   getWeatherByCity(city).then(onCityLoaded)
-  // },[city])
-    
-  
+      
   return(
     <ItemsList data={data} cityDelete={cityDelete}/>
   )
