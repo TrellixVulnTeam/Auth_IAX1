@@ -5,7 +5,8 @@ const initialState = {
   data:[],
   cityInfo:{},
   city:'',
-  allCities:[]
+  allCities:[],
+  loading:false
 }
 
 export const searchCity=createAsyncThunk(
@@ -26,16 +27,6 @@ export const weatherInfo=createAsyncThunk(
   }
 )
 
-// export const FirstLoadingCities=createAsyncThunk(
-//   'weather/FirstLoadingCities',
-//   async(state)=>{
-//     const {getWeatherByCity}=useWeatherServices();
-//     for(let i=0;i<state.allCities.length;i++){
-//       const response= await getWeatherByDays(state.)
-//       return response
-//     }
-//   }
-// )
 const WeatherSlice=createSlice({
   name:'weather',
   initialState,
@@ -43,7 +34,6 @@ const WeatherSlice=createSlice({
       delCity: (state, action) => {
           state.data=current(state.data).filter((item,id)=>(id!==action.payload))
           state.allCities=current(state.allCities).filter((item,id)=>(id!==action.payload))
-          console.log(state.allCities)
           localStorage.setItem('data',state.allCities)
       }
   },
@@ -51,12 +41,13 @@ const WeatherSlice=createSlice({
   extraReducers: (builder) => {
     builder
         .addCase(searchCity.pending,(state,action)=>{
-          console.log('Download date city')
+          state.loading=true;
         })
         .addCase(searchCity.fulfilled,(state,action)=>{
           state.data.push(action.payload)
           state.allCities.push(action.payload.name)
-          localStorage.setItem('data',current(state.allCities))         
+          localStorage.setItem('data',current(state.allCities))
+          state.loading=false;         
         })
         .addCase(searchCity.rejected,(state,action)=>{
           console.log('error')

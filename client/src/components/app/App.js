@@ -5,19 +5,23 @@ import HomePanel from '../homePanel/homePanel'
 import { BrowserRouter as Router,Route,Routes} from "react-router-dom";
 import WeatherList from '../weatherList/WeatherList';
 import WeatherInfo from '../weatherInfo/WeatherInfo';
-
+import ExchangeValue from '../exchangeValue/ExchangeValue';
+import AppHeader from '../appHeader/AppHeader'
 function App() {
  
   return (
     
     <Router>
+      <AppHeader/>
       <div className='App'>
+        
       <Routes>
         <Route path='/' element={<SignInPanel/>}/>
         <Route path='/registration' element={<LoginPanel/>}/>
         <Route path='/Home' element={<HomePanel/>}/>
         <Route path='/weatherList' element={<WeatherList/>}/>
         <Route path='/:city' element={<WeatherInfo/>}/>
+        <Route path='/exchangeValue' element={<ExchangeValue/>}/>
       </Routes>
       </div>
     </Router>

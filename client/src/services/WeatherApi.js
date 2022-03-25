@@ -13,7 +13,10 @@ const useWeatherServices=()=>{
     const res=await request(`${_apiBase}forecast.json?${_apikey}&q=${city}&days=8&aqi=no&alerts=no`)
     return _transformWeatherByDays(res);
   }
-
+  const getAutoCompleteCityName=async(city)=>{
+    const res=await request(`${_apiBase}search.json?${_apikey}&q=${city}`)
+    return res;
+  }
   const _transformWeather=(res)=>{
     return{
       name:res.location.name,
@@ -52,6 +55,6 @@ const useWeatherServices=()=>{
 
     }
   }
-  return {getWeatherByCity,getWeatherByDays};
+  return {getWeatherByCity,getWeatherByDays,getAutoCompleteCityName};
 }
 export default useWeatherServices;
