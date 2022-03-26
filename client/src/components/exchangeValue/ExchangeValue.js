@@ -3,55 +3,48 @@ import Spinner from 'react-bootstrap/Spinner'
 import useConversionServices from '../../services/ConversionApi';
 import { useState ,useEffect} from 'react';
 import { useDispatch, useSelector,getState } from 'react-redux';
-import {changeValue} from './ValueSlice.js'
+import {changeValue,changeConvertValue,changeInputValue,onUpdateLocal} from './ValueSlice.js'
+
 
 const ExchangeValue=()=>{
 
 const [currency,setCurrency]=useState('1');
-const [updateCurrency,setUpdateCurrency]=useState('');
-const {getConvertValue}=useConversionServices();
 const [inputVal,setInputVal]=useState('USD');
 const [convertVal,setConvertVal]=useState('RUB')
-const [spinner,setSpinner]=useState(false);
-const [result,setResult]=useState(false)
+const {spinner,result,convertCurrency}=useSelector(store=>store.value)
 const dispatch=useDispatch()
 
 const request=()=>{
-  setSpinner(true);
-  getConvertValue(inputVal).then(Load)
+  dispatch(changeValue(inputVal))
 }
 
  useEffect(()=>{
+  console.log(currency)
   request();
  },[convertVal,inputVal,currency])
 
 const changeInputVal=(e)=>{
   setInputVal(e.target.value)
+  dispatch(changeInputValue(inputVal))
 }
 const changeConvertVal=(e)=>{
   setConvertVal(e.target.value)
+  dispatch(changeConvertValue(convertVal))
 }
 
-const onUpdateLocal=(e)=>{
+const onUpdate=(e)=>{
   const currency=e.target.value;
   setCurrency(currency);
-  setResult(false);
-}
-
-const Load=(res)=>{
-  dispatch(changeValue(inputVal))
-  const coefficient=res.data[convertVal].value
-  setUpdateCurrency(currency*coefficient);
-  setSpinner(false)
-  setResult(true)
+  dispatch(onUpdateLocal(currency))
+  
 }
 
 const spinnerView=spinner?  <Spinner animation="border" size='sm' variant="dark" />:null;
-const content=result?<Result currency={currency} inputVal={inputVal} updateCurrency={updateCurrency} convertVal={convertVal}/>:null;
-  
+const content=result?<Result currency={currency} inputVal={inputVal} convertCurrency={convertCurrency} convertVal={convertVal}/>:null;
+
 return(
     <>
-  
+    <h2>Convert</h2>
     <div className='convert'>
     <div className='convertBlock'>
       <label>From
@@ -70,7 +63,7 @@ return(
             className="convert-input"
             placeholder="..."
             value={currency}
-            onChange={onUpdateLocal}
+            onChange={onUpdate}
             />
     </label>   
             <label> To
@@ -90,15 +83,14 @@ return(
       {content}
     </div>
     </div>
-    
   
     </>
   )
 }
 
-const Result=({currency,inputVal,updateCurrency,convertVal})=>{
+const Result=({currency,inputVal,convertCurrency,convertVal})=>{
   return(
-    <div>{currency} {inputVal} is {updateCurrency} {convertVal}</div> 
+    <div>{currency} {inputVal} is {convertCurrency} {convertVal}</div> 
   )
 }
 export default ExchangeValue;

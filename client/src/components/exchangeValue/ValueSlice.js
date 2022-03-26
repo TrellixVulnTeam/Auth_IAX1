@@ -13,7 +13,6 @@ export const changeValue=createAsyncThunk(
   'value/changeValue',
   async(state)=>{
     const {getConvertValue}=useConversionServices();
-    console.log(state)
     const response=getConvertValue(state)
     return response
   }
@@ -25,9 +24,15 @@ const ValueSlice=createSlice({
   reducers: {
       changeInputValue:(state,action)=>{
         state.inputVal=action.payload
+        
       },
       changeConvertValue:(state,action)=>{
         state.convertVal=action.payload;
+        
+      },
+      onUpdateLocal:(state,action)=>{
+        state.currency=action.payload;
+        state.result=false;
       }
   },
 
@@ -37,10 +42,11 @@ const ValueSlice=createSlice({
         state.spinner=true
       })
       .addCase(changeValue.fulfilled,(state,action)=>{
-        state.convertCurrency=action.payload.data[state.convertVal].value
+        console.log(state.convertVal)
+        state.convertCurrency=action.payload.data[state.convertVal].value*state.currency
         state.spinner=false
         state.result=true
-        console.log(state.convertCurrency)
+        
       
       })
       .addCase(changeValue.rejected,(state,action)=>{
@@ -56,5 +62,6 @@ export default reducer;
 
 export const {
   changeConvertValue,
-  changeInputValue
+  changeInputValue,
+  onUpdateLocal
 } = actions;

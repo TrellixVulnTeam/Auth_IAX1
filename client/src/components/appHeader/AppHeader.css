@@ -1,13 +1,13 @@
-header{
+.app__header{
   background-color: #E0E5FF;
   padding:15px;
 }
-ul{
+.app__header ul{
   display:flex;
   justify-content: right;
   margin-right: 30px;
 }
-li{
+.app__header li{
   list-style-type: none;
   margin:0 8px;
 }

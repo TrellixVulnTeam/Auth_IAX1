@@ -28,6 +28,7 @@ useEffect(()=>{
   for(let i=0;i<data.length;i++){
     if(data[i]) dispatch(searchCity(data[i]))
   }
+  console.log(localStorage.getItem('data'))
 }
 },[])
 
@@ -42,6 +43,8 @@ const addCity=()=>{
   dispatch(searchCity(weatherCity))
   setWeatherCity('')
 }
+
+
 const content=loading?<Spinner animation="border" />:<WeatherItems/>
 return(
   <>
@@ -61,11 +64,15 @@ return(
       />
      
     </Stack>
-
+    
       <Button onClick={addCity} variant="outline-success">Добавить</Button>{' '}
 
   </div>
   {content}
+
+
+  
+
   </>
 )
   
