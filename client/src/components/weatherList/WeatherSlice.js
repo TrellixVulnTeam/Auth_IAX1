@@ -6,7 +6,7 @@ const initialState = {
   data:[],
   cityInfo:{},
   city:'',
-  localCity:'',
+  userCity:'',
   allCities:[],
   loading:false
 }
@@ -70,7 +70,7 @@ const WeatherSlice=createSlice({
         })
 
         .addCase(localCity.fulfilled,(state,action)=>{
-          state.localCity=action.payload.city
+          state.userCity=action.payload.city
         })
         .addCase(localCity.rejected,(state,action)=>{
           console.log(action)

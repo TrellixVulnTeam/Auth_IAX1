@@ -9,12 +9,14 @@ import Autocomplete from '@mui/material/Autocomplete';
 import TextField from '@mui/material/TextField';
 import Stack from '@mui/material/Stack';
 import Spinner from 'react-bootstrap/Spinner';
-
+import Modal from '../Modal/Modal'
 
 const WeatherList=()=>{
+const [modalActive,setModalActive]=useState(true)
+
 
 const [weatherCity,setWeatherCity]=useState('')
-const {loading} = useSelector(store => store.weather);
+const {userCity,loading} = useSelector(store => store.weather);
 const dispatch=useDispatch()
 const { getAutoCompleteCityName } = useWeatherServices();
 const [variables,setVariables]=useState([])
@@ -31,6 +33,7 @@ useEffect(()=>{
     if(data[i]) dispatch(searchCity(data[i]))
   } 
 }
+dispatch(localCity())
 },[])
 
 useEffect(async()=>{
@@ -45,13 +48,16 @@ const addCity=()=>{
   setWeatherCity('')
 }
 
-
+const View=userCity?`${userCity} is your City?`:null;
 const content=loading?<Spinner animation="border" />:<WeatherItems/>
 return(
   <>
   <div className="search-panel">
-
-     <h3>Добавление...</h3>
+  <Modal active={modalActive} setActive={setModalActive}>
+    <h3>Test Modal</h3>
+  </Modal>
+  {View}
+     <h3>Add...</h3>
       
     <Stack spacing={2} sx={{ width: 300 }}>
       <Autocomplete
@@ -66,9 +72,10 @@ return(
      
     </Stack>
     
-      <Button onClick={addCity} variant="outline-success">Добавить</Button>{' '}
+    <Button onClick={addCity} variant="outline-success">Addв</Button>{' '}
 
   </div>
+  
   {content}
 
 
