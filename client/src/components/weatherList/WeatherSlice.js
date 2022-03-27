@@ -1,10 +1,12 @@
 import {createSlice,createAsyncThunk,current} from "@reduxjs/toolkit"
 import useWeatherServices from '../../services/WeatherApi'
+import useIpServices from '../../services/IpApi'
 
 const initialState = {
   data:[],
   cityInfo:{},
   city:'',
+  localCity:'',
   allCities:[],
   loading:false
 }
@@ -17,7 +19,14 @@ export const searchCity=createAsyncThunk(
     return response
   }
 )
-
+export const localCity=createAsyncThunk(
+  'weather/localCity',
+  async()=>{
+    const {getUserIp}=useIpServices()
+    const response=await getUserIp()
+    return response
+  }
+)
 export const weatherInfo=createAsyncThunk(
   'weather/weatherInfo',
   async(state)=>{
@@ -60,6 +69,13 @@ const WeatherSlice=createSlice({
           console.log('error')
         })
 
+        .addCase(localCity.fulfilled,(state,action)=>{
+          state.localCity=action.payload.city
+        })
+        .addCase(localCity.rejected,(state,action)=>{
+          console.log(action)
+          console.log('error')
+        })
         .addDefaultCase(() => {})
 }
 })

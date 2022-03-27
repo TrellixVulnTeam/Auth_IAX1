@@ -24,7 +24,7 @@ const  login=(email,password)=>{
   setEmail('')
   setPassword('')
 }
-if (auth) window.location.assign('http://localhost:3000/weather')
+if (auth) window.location.assign('http://localhost:3000/weatherList')
   return(
     <>
     <h3>Log in to your account</h3>

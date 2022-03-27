@@ -38,10 +38,11 @@ const LoginPanel = () => {
       <Spinner animation="border" />
     )
   }
+  
   if (auth){
     return(
       <>
-          <h2>{user.isActive ? 'Аккаунт активирован ':'Активируйте аккаунт'}</h2>
+          <h2>{user.isActivated ? 'Аккаунт активирован ':'Активируйте аккаунт'}</h2>
           {Content}
          <Button onClick={()=>{dispatch(logout())}} variant="outline-success">Log Out</Button>{' '}
       </>

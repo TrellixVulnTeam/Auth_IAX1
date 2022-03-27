@@ -2,13 +2,14 @@ import './WeatherList.css'
 import { useEffect ,useState} from "react";
 import Button from 'react-bootstrap/Button'
 import { useDispatch, useSelector,getState } from 'react-redux';
-import {searchCity} from './WeatherSlice';
+import {searchCity,localCity} from './WeatherSlice';
 import WeatherItems from '../weatherItems/WeatherItems';
 import useWeatherServices from '../../services/WeatherApi';
 import Autocomplete from '@mui/material/Autocomplete';
 import TextField from '@mui/material/TextField';
 import Stack from '@mui/material/Stack';
 import Spinner from 'react-bootstrap/Spinner';
+
 
 const WeatherList=()=>{
 
@@ -17,6 +18,7 @@ const {loading} = useSelector(store => store.weather);
 const dispatch=useDispatch()
 const { getAutoCompleteCityName } = useWeatherServices();
 const [variables,setVariables]=useState([])
+
 
 const onUpdateCity=(e)=>{
   setWeatherCity(e.target.value)
@@ -27,8 +29,7 @@ useEffect(()=>{
   const data=localStorage.getItem('data').split(',')
   for(let i=0;i<data.length;i++){
     if(data[i]) dispatch(searchCity(data[i]))
-  }
-  console.log(localStorage.getItem('data'))
+  } 
 }
 },[])
 

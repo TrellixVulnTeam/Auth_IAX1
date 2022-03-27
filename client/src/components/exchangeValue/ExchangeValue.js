@@ -19,17 +19,19 @@ const request=()=>{
 }
 
  useEffect(()=>{
-  console.log(currency)
+  dispatch(changeInputValue(inputVal))
+  dispatch(changeConvertValue(convertVal))
+  // console.log(currency)
   request();
  },[convertVal,inputVal,currency])
 
 const changeInputVal=(e)=>{
   setInputVal(e.target.value)
-  dispatch(changeInputValue(inputVal))
+  // dispatch(changeInputValue(inputVal))
 }
 const changeConvertVal=(e)=>{
   setConvertVal(e.target.value)
-  dispatch(changeConvertValue(convertVal))
+  // dispatch(changeConvertValue(convertVal))
 }
 
 const onUpdate=(e)=>{

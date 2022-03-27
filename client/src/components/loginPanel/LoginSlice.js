@@ -42,6 +42,7 @@ const LoginSlice=createSlice({
     try {
       const response = await AuthService.logout();
       localStorage.removeItem('token');
+      localStorage.removeItem('data');
       state.auth=false;
       console.log(state.auth)
       state.user={};
