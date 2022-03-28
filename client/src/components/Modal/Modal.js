@@ -1,8 +1,13 @@
 import './Modal.css'
+import { closeModal } from '../weatherList/WeatherSlice';
+import { useDispatch } from 'react-redux';
 
-const Modal=({active,setActive,children})=>{
+
+const Modal=({active,children})=>{
+const dispatch=useDispatch()
+
   return(
-    <div className={active? 'modal active':'modal'} onClick={()=>setActive(false)}>
+    <div className={active? 'modal active':'modal'} onClick={()=>dispatch(closeModal())}>
       <div className={active? 'modal__content active':'modal__content'} onClick={(e)=>e.stopPropagation()}>
           {children}
       </div>

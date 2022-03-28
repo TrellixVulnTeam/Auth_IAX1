@@ -8,7 +8,9 @@ const initialState = {
   city:'',
   userCity:'',
   allCities:[],
-  loading:false
+  loading:false,
+  modalActive:true,
+  countryFlag:''
 }
 
 export const searchCity=createAsyncThunk(
@@ -35,7 +37,14 @@ export const weatherInfo=createAsyncThunk(
     return response
   }
 )
-
+export const addUserCity=createAsyncThunk(
+  'weather/addUserCity',
+   async(state)=>{
+    const {getWeatherByCity}=useWeatherServices();
+    const response= await getWeatherByCity(state)
+    return response
+  }
+)
 const WeatherSlice=createSlice({
   name:'weather',
   initialState,
@@ -44,6 +53,9 @@ const WeatherSlice=createSlice({
           state.data=current(state.data).filter((item,id)=>(id!==action.payload))
           state.allCities=current(state.allCities).filter((item,id)=>(id!==action.payload))
           localStorage.setItem('data',state.allCities)
+      },
+      closeModal:(state)=>{
+        state.modalActive=false;
       }
   },
 
@@ -62,6 +74,20 @@ const WeatherSlice=createSlice({
           console.log('error')
         })
 
+        .addCase(addUserCity.pending,(state,action)=>{
+          state.loading=true;
+        })
+        .addCase(addUserCity.fulfilled,(state,action)=>{
+          state.data.push(action.payload);
+          state.allCities.push(action.payload.name);
+          localStorage.setItem('data',current(state.allCities));
+          state.loading=false;
+          state.modalActive=false;         
+        })
+        .addCase(addUserCity.rejected,(state,action)=>{
+          console.log('error')
+        })
+
         .addCase(weatherInfo.fulfilled,(state,action)=>{
           state.cityInfo=action.payload
         })
@@ -71,6 +97,8 @@ const WeatherSlice=createSlice({
 
         .addCase(localCity.fulfilled,(state,action)=>{
           state.userCity=action.payload.city
+          state.countryFlag=action.payload.country_flag
+          console.log(action.payload)
         })
         .addCase(localCity.rejected,(state,action)=>{
           console.log(action)
@@ -85,5 +113,6 @@ const {actions, reducer} = WeatherSlice;
 export default reducer;
 
 export const {
-  delCity
+  delCity,
+  closeModal
 } = actions;

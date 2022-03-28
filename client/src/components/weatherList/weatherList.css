@@ -8,6 +8,15 @@
   padding:20px 10%;
   
 }
+.modal__btn{
+  font-size: 38px;
+  margin-top: 30px;
+  margin-left: 10px;
+  padding:10px 40px;
+}
+.modal__header{
+  font-size: 50px;
+}
 .search-panel input{
   background: transparent;
   border:1px solid #fff;

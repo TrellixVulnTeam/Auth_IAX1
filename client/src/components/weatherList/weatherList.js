@@ -2,7 +2,7 @@ import './WeatherList.css'
 import { useEffect ,useState} from "react";
 import Button from 'react-bootstrap/Button'
 import { useDispatch, useSelector,getState } from 'react-redux';
-import {searchCity,localCity} from './WeatherSlice';
+import {searchCity,localCity, addUserCity,closeModal} from './WeatherSlice';
 import WeatherItems from '../weatherItems/WeatherItems';
 import useWeatherServices from '../../services/WeatherApi';
 import Autocomplete from '@mui/material/Autocomplete';
@@ -12,11 +12,11 @@ import Spinner from 'react-bootstrap/Spinner';
 import Modal from '../Modal/Modal'
 
 const WeatherList=()=>{
-const [modalActive,setModalActive]=useState(true)
+// const [modalActive,setModalActive]=useState(true)
 
 
 const [weatherCity,setWeatherCity]=useState('')
-const {userCity,loading} = useSelector(store => store.weather);
+const {userCity,loading,modalActive} = useSelector(store => store.weather);
 const dispatch=useDispatch()
 const { getAutoCompleteCityName } = useWeatherServices();
 const [variables,setVariables]=useState([])
@@ -48,17 +48,18 @@ const addCity=()=>{
   setWeatherCity('')
 }
 
-const View=userCity?`${userCity} is your City?`:null;
-const content=loading?<Spinner animation="border" />:<WeatherItems/>
+
+const content=loading ? <Spinner animation="border" />:<WeatherItems/>
 return(
   <>
-  <div className="search-panel">
-  <Modal active={modalActive} setActive={setModalActive}>
-    <h3>Test Modal</h3>
+  <Modal active={modalActive} >
+    <h2 className='modal__header'>Is your city {userCity} ?</h2>
+    <Button onClick={()=>{dispatch(addUserCity(userCity))}}  className='modal__btn' variant="success">Yes</Button>
+    <Button onClick={()=>{dispatch(closeModal())}} className='modal__btn' variant="danger">No</Button>
   </Modal>
-  {View}
-     <h3>Add...</h3>
-      
+
+  <div className="search-panel">
+     <h3>Add...</h3>   
     <Stack spacing={2} sx={{ width: 300 }}>
       <Autocomplete
         id="free-solo-demo"
@@ -72,14 +73,11 @@ return(
      
     </Stack>
     
-    <Button onClick={addCity} variant="outline-success">Addв</Button>{' '}
+    <Button onClick={addCity} variant="outline-success">Add</Button>{' '}
 
   </div>
   
   {content}
-
-
-  
 
   </>
 )
