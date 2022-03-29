@@ -7,6 +7,8 @@ import WeatherList from '../weatherList/WeatherList';
 import WeatherInfo from '../weatherInfo/WeatherInfo';
 import ExchangeValue from '../exchangeValue/ExchangeValue';
 import AppHeader from '../appHeader/AppHeader'
+import MarvelPage from '../pages/MarvelPage'
+
 function App() {
  
   return (
@@ -22,6 +24,7 @@ function App() {
         <Route path='/weatherList' element={<WeatherList/>}/>
         <Route path='/:city' element={<WeatherInfo/>}/>
         <Route path='/exchangeValue' element={<ExchangeValue/>}/>
+        <Route path='/marvelPage' element={<MarvelPage/>}/>
       </Routes>
       </div>
     </Router>

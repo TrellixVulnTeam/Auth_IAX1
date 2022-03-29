@@ -26,7 +26,7 @@ const  login=(email,password)=>{
 }
 if (auth) window.location.assign('http://localhost:3000/weatherList')
   return(
-    <>
+    <div className='SignIn'>
     <h3>Log in to your account</h3>
      <div className="text-field">
         <label className="text-field__label">Email</label>
@@ -42,7 +42,7 @@ if (auth) window.location.assign('http://localhost:3000/weatherList')
       <Button onClick={() => login(email, password)} variant="outline-success" type='submit'>Sign In</Button>{' '}
       <h5>Don't have an account ? <NavLink to='/registration'>Sign up</NavLink></h5>
       <NavLink  style={({isActive})=>({color:isActive?'#9f0013':'inherit'})} to="/Home"><Button variant="outline-success">HomePage</Button>{' '}</NavLink>
-    </>
+    </div>
   )
 }
 export default SignInPanel;

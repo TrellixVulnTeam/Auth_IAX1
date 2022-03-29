@@ -38,7 +38,7 @@ const LoginPanel = () => {
       <Spinner animation="border" />
     )
   }
-  
+
   if (auth){
     return(
       <>
@@ -50,7 +50,7 @@ const LoginPanel = () => {
   }
 
   return (
-    <>
+    <div className='LoginPanel'>
     {Content}
       <div className="text-field">
         <label className="text-field__label">Email</label>
@@ -66,7 +66,7 @@ const LoginPanel = () => {
       <Button onClick={() => registration(email, password)} variant="outline-success" type='submit'>Sign Up</Button>{' '}
       <h5>Already have an account ? <NavLink to='/'>Sign in</NavLink></h5>
       <NavLink  style={({isActive})=>({color:isActive?'#9f0013':'inherit'})} to="/Home"><Button variant="outline-success">HomePage</Button>{' '}</NavLink>
-    </>
+    </div>
   )
 }
 export default LoginPanel;

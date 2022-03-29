@@ -29,7 +29,8 @@ const AppHeader = () => {
             <li>{user?.isActivated? <Button onClick={()=>{dispatch(logout())}} variant="outline-success">Log Out</Button>:<NavLink style={({isActive})=>({color:isActive?'#9f0013':'inherit'})}  to="/">Sig In</NavLink>}</li>/
             <li><NavLink end style={({isActive})=>({color:isActive?'#9f0013':'inherit'})} to="/weatherList">Weather</NavLink></li>
             /
-            <li><NavLink  style={({isActive})=>({color:isActive?'#9f0013':'inherit'})} to="/exchangeValue">Exchange Rates</NavLink></li>
+            <li><NavLink  style={({isActive})=>({color:isActive?'#9f0013':'inherit'})} to="/exchangeValue">Exchange Rates</NavLink></li>/
+            <li><NavLink  style={({isActive})=>({color:isActive?'#9f0013':'inherit'})} to="/marvelPage">Marvel</NavLink></li>
         </ul>
       </nav>
     </header>

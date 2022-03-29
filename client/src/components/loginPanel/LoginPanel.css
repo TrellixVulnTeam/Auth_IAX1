@@ -41,3 +41,6 @@ h5 a:hover{
   color:green;
   text-decoration: underline;
 }
+.LoginPanel{
+    padding:20px 400px 0;
+}

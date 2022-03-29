@@ -12,8 +12,6 @@ import Spinner from 'react-bootstrap/Spinner';
 import Modal from '../Modal/Modal'
 
 const WeatherList=()=>{
-// const [modalActive,setModalActive]=useState(true)
-
 
 const [weatherCity,setWeatherCity]=useState('')
 const {userCity,loading,modalActive} = useSelector(store => store.weather);
