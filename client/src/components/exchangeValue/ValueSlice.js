@@ -1,5 +1,6 @@
 import {createSlice,createAsyncThunk,current} from "@reduxjs/toolkit"
 import useConversionServices from '../../services/ConversionApi'
+import useMarvelServices from "../../services/MarvelServices"
 
 const initialState = {
   currency:'1',
@@ -18,6 +19,7 @@ export const changeValue=createAsyncThunk(
   }
 
 )
+
 const ValueSlice=createSlice({
   name:'value',
   initialState,
@@ -52,6 +54,7 @@ const ValueSlice=createSlice({
       .addCase(changeValue.rejected,(state,action)=>{
         console.log('error')
       })
+       
        
 }
 })

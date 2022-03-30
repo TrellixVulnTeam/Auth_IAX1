@@ -17,7 +17,7 @@ const MarvelPage=()=>{
     
       <div className="char__content">
                   <CharList onCharSelected={onCharSelected} />
-                  <CharInfo charId={selectedChar}/>         
+                  {/* <CharInfo charId={selectedChar}/>          */}
       </div>
     </div>
   )

@@ -9,7 +9,8 @@ const CharInfo =(props)=>{
   const [char, setChar] = useState(null);
   
     
-   const {loading,error,getCharacter,clearError}= useMarvelServices();
+//    const {loading,error,getCharacter,clearError}= useMarvelServices();
+   const {getCharacter}= useMarvelServices();
 
   useEffect(() => {
     updateChar();
@@ -25,9 +26,9 @@ const CharInfo =(props)=>{
   }
  
   const  updateChar=()=>{
-    clearError();//для того чтобы была возможность поменять персонажа после того выскачет ошибка
+    // clearError();//для того чтобы была возможность поменять персонажа после того выскачет ошибка
     const { charId } = props;
-    console.log(`CharId in Update=${charId}`)
+    // console.log(`CharId in Update=${charId}`)
           if(!charId){
               return;
           }
@@ -36,15 +37,16 @@ const CharInfo =(props)=>{
                 
       }
     
-        const sceleton= char || loading ||error ? null:<Sceleton/>//если ничего у нас нет то мы будем загружать skeleton 
-        const errorMessage = error ? <h2>Error</h2>: null;
-        const spinner = loading ?  <Spinner animation="border" /> : null;
-        const content = !(loading || error|| !char) ? <View char={char} /> : null;
+        // const sceleton= char || loading ||error ? null:<Sceleton/>//если ничего у нас нет то мы будем загружать skeleton 
+        // const errorMessage = error ? <h2>Error</h2>: null;
+        // const spinner = loading ?  <Spinner animation="border" /> : null;
+        // const content = !(loading || error|| !char) ? <View char={char} /> : null;
+        const content=<View char={char} /> 
         return (
             <div className="char__info">
-             {sceleton}
+             {/* {sceleton}
              {errorMessage}
-             {spinner}
+             {spinner} */}
              {content}
             </div>
         )

@@ -9,7 +9,7 @@ const RandomChar=(props)=>{
   const [char, setChar] = useState({});
   
  
-  const {loading,error,getCharacter,clearError} =  useMarvelServices();
+  const {getCharacter} =  useMarvelServices();
 
   useEffect(() => {
     
@@ -23,7 +23,7 @@ const RandomChar=(props)=>{
   }
  
   const updateChar = () => {
-    clearError();//для того чтобы была возможность поменять персонажа после того выскачет ошибка
+    // clearError();//для того чтобы была возможность поменять персонажа после того выскачет ошибка
     const id = Math.floor(Math.random()*(1011400-1011000)+1011000);
     getCharacter(id)//getCharacter возвращает нужный объект res и мы в then обновляем state
               .then(onCharLoaded)//Аргумент который в then автоматически удет подставлятся в onCharLoaded
@@ -32,13 +32,14 @@ const RandomChar=(props)=>{
   }
 
    
-    const errorMessage = error ? <h2>Error</h2>: null;
-    const spinner = loading ?  <Spinner animation="border" />: null;
-    const content = !(loading || error) ? <View char={char} onCharSelected={()=>props.onCharSelected(char.id)}/> : null;
+    // const errorMessage = error ? <h2>Error</h2>: null;
+    // const spinner = loading ?  <Spinner animation="border" />: null;
+    // const content = !(loading || error) ? <View char={char} onCharSelected={()=>props.onCharSelected(char.id)}/> : null;
+    const content=<View char={char} onCharSelected={()=>props.onCharSelected(char.id)}/>
     return (
       <div className="randomchar">
-        {errorMessage}{/*если null то просто ничего не будет рендерится */}
-        {spinner}
+        {/* {errorMessage}если null то просто ничего не будет рендерится */}
+        {/* {spinner} */}
         {content}
           <div className="randomchar__static">
               <p className="randomchar__title">

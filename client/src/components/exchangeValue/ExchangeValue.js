@@ -16,6 +16,7 @@ const dispatch=useDispatch()
 
 const request=()=>{
   dispatch(changeValue(inputVal))
+  
 }
 
  useEffect(()=>{

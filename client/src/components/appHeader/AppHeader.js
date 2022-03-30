@@ -16,7 +16,7 @@ const AppHeader = () => {
     if(localStorage.getItem('token')){
       dispatch(checkAuth())
     }
-    console.log(user)
+    // console.log(user)
   },[])
 
   return (
