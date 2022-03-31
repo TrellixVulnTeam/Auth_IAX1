@@ -10,7 +10,8 @@ const initialState = {
   allCities:[],
   loading:false,
   modalActive:true,
-  countryFlag:''
+  countryFlag:'',
+  firstUpd:true
 }
 
 export const searchCity=createAsyncThunk(
@@ -67,6 +68,7 @@ const WeatherSlice=createSlice({
         .addCase(searchCity.fulfilled,(state,action)=>{
           state.data.push(action.payload)
           state.allCities.push(action.payload.name)
+          state.firstUpd=false
           localStorage.setItem('data',current(state.allCities))
           state.loading=false;         
         })
@@ -81,6 +83,7 @@ const WeatherSlice=createSlice({
           state.data.push(action.payload);
           state.allCities.push(action.payload.name);
           localStorage.setItem('data',current(state.allCities));
+          state.firstUpd=false
           state.loading=false;
           state.modalActive=false;         
         })

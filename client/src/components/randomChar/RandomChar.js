@@ -1,32 +1,24 @@
 import { useState,useEffect } from 'react';
 import './RandomChar.scss';
 import Spinner from 'react-bootstrap/Spinner'
-import useMarvelServices from '../../services/MarvelServices';
+// import useMarvelServices from '../../services/MarvelServices';
 import mjolnir from '../../resources/img/mjolnir.png';
 // import ErrorMessage from '../errorMessage/ErrorMessage';
+import {getCharacter} from '../charList/CharSlice'
+import { useDispatch, useSelector } from 'react-redux';
 
-const RandomChar=(props)=>{
-  const [char, setChar] = useState({});
-  
- 
-  const {getCharacter} =  useMarvelServices();
 
+const RandomChar=()=>{
+  const dispatch=useDispatch()
+  const {rndChar}=useSelector(store=>store.char)
   useEffect(() => {
-    
     updateChar();
   },[])
   
- 
-  const onCharLoaded = (char) => {
-    setChar(char);
-   // this.setState({ char,loading:false });//так как это вызывается как коллбек ниже то loading станет false как только данные загрузятся
-  }
- 
   const updateChar = () => {
     // clearError();//для того чтобы была возможность поменять персонажа после того выскачет ошибка
     const id = Math.floor(Math.random()*(1011400-1011000)+1011000);
-    getCharacter(id)//getCharacter возвращает нужный объект res и мы в then обновляем state
-              .then(onCharLoaded)//Аргумент который в then автоматически удет подставлятся в onCharLoaded
+    dispatch(getCharacter(id))
               
               
   }
@@ -35,7 +27,7 @@ const RandomChar=(props)=>{
     // const errorMessage = error ? <h2>Error</h2>: null;
     // const spinner = loading ?  <Spinner animation="border" />: null;
     // const content = !(loading || error) ? <View char={char} onCharSelected={()=>props.onCharSelected(char.id)}/> : null;
-    const content=<View char={char} onCharSelected={()=>props.onCharSelected(char.id)}/>
+    const content=<View char={rndChar} />
     return (
       <div className="randomchar">
         {/* {errorMessage}если null то просто ничего не будет рендерится */}
@@ -60,7 +52,7 @@ const RandomChar=(props)=>{
    
 }
 
-const View = ({char,onCharSelected}) => {
+const View = ({char}) => {
   const { name, description, thumbnail, homepage, wiki, } = char;
   let CharImg = "randomchar__img" ;
   if (thumbnail==="http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available.jpg") CharImg="randomchar__no__img"
@@ -69,7 +61,7 @@ const View = ({char,onCharSelected}) => {
     <div className="randomchar__block">
       <img src={thumbnail} alt="Random character" className={ CharImg}/>
               <div className="randomchar__info">
-            <p onClick={onCharSelected} className="randomchar__name">{ name}</p>
+            <p  className="randomchar__name">{ name}</p>
                   <p className="randomchar__descr">
                      {description}
                   </p>

@@ -2,51 +2,35 @@ import './CharInfo.scss';
 import { useState,useEffect } from 'react';
 import Spinner from 'react-bootstrap/Spinner'
 import Sceleton from '../sceleton/Sceleton';
-import useMarvelServices from '../../services/MarvelServices';
 import {Link} from 'react-router-dom';
+import {getInfoCharacter} from '../charList/CharSlice'
+import { useDispatch, useSelector } from 'react-redux';
 
-const CharInfo =(props)=>{
-  const [char, setChar] = useState(null);
+const CharInfo =()=>{
+  const {infoChar,selectedId,loading,error}=useSelector(store=>store.char)
+  const dispatch=useDispatch();
   
-    
-//    const {loading,error,getCharacter,clearError}= useMarvelServices();
-   const {getCharacter}= useMarvelServices();
-
   useEffect(() => {
     updateChar();
-   
-  }, [props.charId])
+    console.log(infoChar)
+  }, [selectedId])
   
-  
-  const onCharLoaded = (char) => {
-    
-    setChar(char);
-        //this.setState({ char,loading:false });//так как это вызывается как коллбек ниже то loading станет false как только данные загрузятся
-    
-  }
- 
   const  updateChar=()=>{
-    // clearError();//для того чтобы была возможность поменять персонажа после того выскачет ошибка
-    const { charId } = props;
-    // console.log(`CharId in Update=${charId}`)
-          if(!charId){
+          if(!selectedId){
               return;
           }
-          getCharacter(charId)
-                .then(onCharLoaded)
-                
-      }
+    dispatch(getInfoCharacter(selectedId))  
+    }
     
-        // const sceleton= char || loading ||error ? null:<Sceleton/>//если ничего у нас нет то мы будем загружать skeleton 
-        // const errorMessage = error ? <h2>Error</h2>: null;
-        // const spinner = loading ?  <Spinner animation="border" /> : null;
-        // const content = !(loading || error|| !char) ? <View char={char} /> : null;
-        const content=<View char={char} /> 
+    const sceleton= selectedId || loading || error ? null:<Sceleton/>
+    const errorMessage = error ? <h2>Error</h2>: null;
+    const spinner = loading ?  <Spinner animation="border" /> : null;
+    const content = !(loading || error|| !selectedId) ? <View char={infoChar} /> : null;
         return (
             <div className="char__info">
-             {/* {sceleton}
+             {sceleton}
              {errorMessage}
-             {spinner} */}
+             {spinner}
              {content}
             </div>
         )
@@ -56,16 +40,14 @@ const CharInfo =(props)=>{
 
 const View=({char})=>{
     const {name,description,thumbnail,homepage,wiki,comics}=char;
-    console.log(comics);
-    const content=comics.length ?  <>{
-                    
+    const content=comics?.length ?  <>{            
         comics.slice(0,10).map((item,id)=>{
             return(
-                <Link to={`/comics/${item.resourceURI.substr(item.resourceURI.indexOf("s/")+2)}`}>
+                
                     <li key={id} className="char__comics-item">
                        {item.name}
                     </li>
-                </Link>
+                
             )
         })
     }</>: <div>Not Data Yet</div>
@@ -90,9 +72,7 @@ const View=({char})=>{
                 </div>
                 <div className="char__comics">Comics:</div>
                 <ul className="char__comics-list">
-                {content}
-                   
-                    
+                {content}  
                 </ul>
         </>
     )

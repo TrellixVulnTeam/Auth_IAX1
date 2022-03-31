@@ -14,7 +14,7 @@ import Modal from '../Modal/Modal'
 const WeatherList=()=>{
 
 const [weatherCity,setWeatherCity]=useState('')
-const {userCity,loading,modalActive} = useSelector(store => store.weather);
+const {userCity,loading,modalActive,firstUpd} = useSelector(store => store.weather);
 const dispatch=useDispatch()
 const { getAutoCompleteCityName } = useWeatherServices();
 const [variables,setVariables]=useState([])
@@ -25,7 +25,7 @@ const onUpdateCity=(e)=>{
 }
 
 useEffect(()=>{
-  if(localStorage.getItem('data')){
+  if(localStorage.getItem('data') && firstUpd){
   const data=localStorage.getItem('data').split(',')
   for(let i=0;i<data.length;i++){
     if(data[i]) dispatch(searchCity(data[i]))
