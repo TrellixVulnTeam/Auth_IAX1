@@ -1,4 +1,4 @@
-import './WeatherItems.css'
+import './WeatherItems.scss'
 import { useDispatch, useSelector,getState } from 'react-redux';
 import {delCity} from '../weatherList/WeatherSlice';
 import { useEffect } from 'react';

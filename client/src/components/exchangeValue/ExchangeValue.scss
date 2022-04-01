@@ -1,0 +1,40 @@
+.Page_Name{
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+} 
+.convert{
+  display:block;
+  padding:50px;
+  border:1px solid black;
+  border-radius:15px;
+  max-width: 1000px;
+  margin:20px auto;
+  &Block{
+    display:flex;
+    justify-content: space-evenly;
+  }
+  &Result
+    button{
+      background-color: #fff;
+      padding:5px 20px;
+      border-radius: 50px;
+      border:1px solid black;
+      margin-top:50px;
+    }
+  &_input{
+    padding:10px;
+  }
+  input{
+    display:block;
+  }
+  select{
+    display:block;
+    padding:10px;
+  }
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+}

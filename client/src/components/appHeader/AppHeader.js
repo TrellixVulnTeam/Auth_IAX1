@@ -1,5 +1,5 @@
 import {NavLink } from "react-router-dom";
-import './AppHeader.css'
+import './AppHeader.scss'
 import { useDispatch, useSelector,getState } from 'react-redux';
 import { useEffect } from "react";
 import { checkAuth,logout } from "../loginPanel/LoginSlice";
@@ -16,7 +16,6 @@ const AppHeader = () => {
     if(localStorage.getItem('token')){
       dispatch(checkAuth())
     }
-    // console.log(user)
   },[])
 
   return (
@@ -30,7 +29,8 @@ const AppHeader = () => {
             <li><NavLink end style={({isActive})=>({color:isActive?'#9f0013':'inherit'})} to="/weatherList">Weather</NavLink></li>
             /
             <li><NavLink  style={({isActive})=>({color:isActive?'#9f0013':'inherit'})} to="/exchangeValue">Exchange Rates</NavLink></li>/
-            <li><NavLink  style={({isActive})=>({color:isActive?'#9f0013':'inherit'})} to="/marvelPage">Marvel</NavLink></li>
+            <li><NavLink  style={({isActive})=>({color:isActive?'#9f0013':'inherit'})} to="/marvelPage">Marvel</NavLink></li>/
+            <li><NavLink  style={({isActive})=>({color:isActive?'#9f0013':'inherit'})} to="/Food">Food</NavLink></li>
         </ul>
       </nav>
     </header>

@@ -7,8 +7,7 @@ const HomePanel=()=>{
 
   return(
     <>
-      <h1>Главная страница</h1>
-       
+      <h1>Главная страница</h1>  
       <NavLink   to="/registration"><Button variant="outline-success">Registration</Button>{' '}</NavLink>
     </>
   )

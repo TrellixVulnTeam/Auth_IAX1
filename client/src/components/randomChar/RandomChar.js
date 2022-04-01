@@ -1,22 +1,19 @@
-import { useState,useEffect } from 'react';
+import {useEffect } from 'react';
 import './RandomChar.scss';
 import Spinner from 'react-bootstrap/Spinner'
-// import useMarvelServices from '../../services/MarvelServices';
 import mjolnir from '../../resources/img/mjolnir.png';
-// import ErrorMessage from '../errorMessage/ErrorMessage';
 import {getCharacter} from '../charList/CharSlice'
 import { useDispatch, useSelector } from 'react-redux';
 
 
 const RandomChar=()=>{
   const dispatch=useDispatch()
-  const {rndChar}=useSelector(store=>store.char)
+  const {rndChar,rndLoading}=useSelector(store=>store.char)
   useEffect(() => {
     updateChar();
   },[])
   
   const updateChar = () => {
-    // clearError();//для того чтобы была возможность поменять персонажа после того выскачет ошибка
     const id = Math.floor(Math.random()*(1011400-1011000)+1011000);
     dispatch(getCharacter(id))
               
@@ -24,14 +21,12 @@ const RandomChar=()=>{
   }
 
    
-    // const errorMessage = error ? <h2>Error</h2>: null;
-    // const spinner = loading ?  <Spinner animation="border" />: null;
-    // const content = !(loading || error) ? <View char={char} onCharSelected={()=>props.onCharSelected(char.id)}/> : null;
-    const content=<View char={rndChar} />
+    const spinner = rndLoading ?  <div className='Spinner'><Spinner animation="border" /></div>: null;
+    const content=!rndLoading ?<View char={rndChar} />:null
     return (
       <div className="randomchar">
-        {/* {errorMessage}если null то просто ничего не будет рендерится */}
-        {/* {spinner} */}
+ 
+        {spinner}
         {content}
           <div className="randomchar__static">
               <p className="randomchar__title">

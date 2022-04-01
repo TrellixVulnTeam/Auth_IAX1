@@ -1,4 +1,4 @@
-import {useHttp} from '../hooks/marvelHook';
+import {useHttp} from '../hooks/useHttp';
 
 const  useMarvelServices=()=>{
   const {loading,request,error,clearError}=useHttp();

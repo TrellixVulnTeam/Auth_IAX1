@@ -1,8 +1,7 @@
-import './ExchangeValue.css'
+import './ExchangeValue.scss'
 import Spinner from 'react-bootstrap/Spinner'
-import useConversionServices from '../../services/ConversionApi';
 import { useState ,useEffect} from 'react';
-import { useDispatch, useSelector,getState } from 'react-redux';
+import { useDispatch, useSelector} from 'react-redux';
 import {changeValue,changeConvertValue,changeInputValue,onUpdateLocal} from './ValueSlice.js'
 
 
@@ -22,17 +21,14 @@ const request=()=>{
  useEffect(()=>{
   dispatch(changeInputValue(inputVal))
   dispatch(changeConvertValue(convertVal))
-  // console.log(currency)
   request();
  },[convertVal,inputVal,currency])
 
 const changeInputVal=(e)=>{
   setInputVal(e.target.value)
-  // dispatch(changeInputValue(inputVal))
 }
 const changeConvertVal=(e)=>{
   setConvertVal(e.target.value)
-  // dispatch(changeConvertValue(convertVal))
 }
 
 const onUpdate=(e)=>{
@@ -47,7 +43,7 @@ const content=result?<Result currency={currency} inputVal={inputVal} convertCurr
 
 return(
     <>
-    <h2>Convert</h2>
+    <h2 className='Page_Name'>Convert</h2>
     <div className='convert'>
     <div className='convertBlock'>
       <label>From
@@ -63,7 +59,7 @@ return(
     </label>
     <label>Amount
     <input type="number"
-            className="convert-input"
+            className="convert_input"
             placeholder="..."
             value={currency}
             onChange={onUpdate}

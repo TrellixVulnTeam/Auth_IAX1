@@ -1,7 +1,7 @@
+import './signInPanel.scss'
 import Button from 'react-bootstrap/Button'
 import { useEffect,useState } from 'react';
 import { useDispatch, useSelector} from 'react-redux';
-import './signInPanel.css'
 import { loginUser } from '../loginPanel/LoginSlice';
 import {NavLink } from "react-router-dom";
 import Spinner from 'react-bootstrap/Spinner'

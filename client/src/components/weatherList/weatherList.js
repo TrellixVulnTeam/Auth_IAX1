@@ -1,4 +1,4 @@
-import './WeatherList.css'
+import './WeatherList.scss'
 import { useEffect ,useState} from "react";
 import Button from 'react-bootstrap/Button'
 import { useDispatch, useSelector,getState } from 'react-redux';

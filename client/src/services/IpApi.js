@@ -1,5 +1,5 @@
 const useIpServices=()=>{
-  const _apiBase='http://ipwhois.app/json/'
+  const _apiBase='http://ipwhois.app/json/12.5.12.0'
 
   const getUserIp=async()=>{
 

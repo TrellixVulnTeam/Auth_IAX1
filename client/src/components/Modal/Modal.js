@@ -1,4 +1,4 @@
-import './Modal.css'
+import './Modal.scss'
 import { closeModal } from '../weatherList/WeatherSlice';
 import { useDispatch } from 'react-redux';
 

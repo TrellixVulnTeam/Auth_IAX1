@@ -10,7 +10,8 @@ const initialState = {
   rndChar:{},
   infoChar:{},
   loading:false,
-  error:false
+  error:false,
+  rndLoading:false,
 }
 
 export const getData=createAsyncThunk(
@@ -66,9 +67,12 @@ const CharSlice=createSlice({
         console.log(action?.error?.message)
       })
       
-
+      .addCase(getCharacter.pending,(state,action)=>{
+        state.rndLoading=true
+      })
       .addCase(getCharacter.fulfilled,(state,action)=>{
         state.rndChar=action.payload;
+        state.rndLoading=false
       })
 
       .addCase(getInfoCharacter.pending,(state,action)=>{

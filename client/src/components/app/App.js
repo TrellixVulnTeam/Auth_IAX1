@@ -1,4 +1,3 @@
-import './App.css';
 import LoginPanel from '../loginPanel/LoginPanel';
 import SignInPanel from '../signInPanel/signInPanel';
 import HomePanel from '../homePanel/homePanel'
@@ -8,7 +7,7 @@ import WeatherInfo from '../weatherInfo/WeatherInfo';
 import ExchangeValue from '../exchangeValue/ExchangeValue';
 import AppHeader from '../appHeader/AppHeader'
 import MarvelPage from '../pages/MarvelPage'
-
+import FoodSearch from '../FoodSearch/FoodSearch';
 function App() {
  
   return (
@@ -25,6 +24,7 @@ function App() {
         <Route path='/:city' element={<WeatherInfo/>}/>
         <Route path='/exchangeValue' element={<ExchangeValue/>}/>
         <Route path='/marvelPage' element={<MarvelPage/>}/>
+        <Route path='/Food' element={<FoodSearch/>}/>
       </Routes>
       </div>
     </Router>

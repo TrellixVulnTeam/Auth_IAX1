@@ -11,7 +11,8 @@ const initialState = {
   loading:false,
   modalActive:true,
   countryFlag:'',
-  firstUpd:true
+  firstUpd:true,
+  infoLoading:false
 }
 
 export const searchCity=createAsyncThunk(
@@ -91,8 +92,12 @@ const WeatherSlice=createSlice({
           console.log('error')
         })
 
+        .addCase(weatherInfo.pending,(state,action)=>{
+          state.infoLoading=true;
+        })
         .addCase(weatherInfo.fulfilled,(state,action)=>{
           state.cityInfo=action.payload
+          state.infoLoading=false;
         })
         .addCase(weatherInfo.rejected,(state,action)=>{
           console.log('error')

@@ -1,0 +1,33 @@
+.weatherItem{
+  display:flex;
+  justify-content: space-between;
+  padding:10px;
+  border:1px solid rgb(11, 126, 161);
+  align-items: center; 
+  border-radius:15px;
+  max-width:1200px;
+  margin:15px auto;
+  & img{
+    margin-top: -10px;
+  }
+  .delButton{
+    margin-left: 60px;
+  }
+  .cityInformation{
+    color:black;
+    border-radius: 5px;
+  }
+}
+.check{
+  text-decoration: none;
+}
+.info{
+  margin-bottom:5px;
+  background-color: #fff;
+  border-radius:50px;
+  border:1px solid black;
+  &:hover{
+    background-color: rgb(74, 153, 107);
+    color:#fff;
+  }
+}
