@@ -5,7 +5,11 @@
   border:1px solid #85A0D6;
   padding:15px;
   margin:30px auto 0;
+ 
 }
+/* .Block{
+  background: url('https://countryflagsapi.com/png/brazil') no-repeat center center;
+} */
 .weatherBlock h3{
   margin-bottom: 20px;
 }

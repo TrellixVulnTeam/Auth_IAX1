@@ -5,12 +5,15 @@ import Autocomplete from '@mui/material/Autocomplete';
 import TextField from '@mui/material/TextField';
 import Stack from '@mui/material/Stack';
 import { useDispatch, useSelector} from 'react-redux';
+import {searchFood} from './FoodSlice' 
+import FoodItems from '../FoodItems/FoodItems'
 
 const FoodSearch=()=>{
   const [variables,setVariables]=useState([])
-  const {getAutoComplete,getFoodData}=useEdamamServices()
+  const {getAutoComplete}=useEdamamServices()
   const [food,setFood]=useState('')
   const dispatch=useDispatch()
+  
   useEffect(async()=>{
     if(food.length>2) {
       const response= await getAutoComplete(food)
@@ -21,12 +24,7 @@ const FoodSearch=()=>{
   const onUpdateFood=(e)=>{
     setFood(e.target.value)
   }
-  const searchFood=async(data)=>{
-    console.log(data)
-    const response=await getFoodData(data)
-    console.log(response);
-  }
-  
+
   return(
     <div className='Food__Page'>
     <h2 className='Food__Page__Search'>Search Food</h2>
@@ -42,7 +40,9 @@ const FoodSearch=()=>{
       />
      
     </Stack>
-    <button onClick={()=>{searchFood(food)}}>Add...</button>
+    <button onClick={()=>{dispatch(searchFood(food))}}>Add...</button>
+
+    <FoodItems/>
     </div>
   )
 }

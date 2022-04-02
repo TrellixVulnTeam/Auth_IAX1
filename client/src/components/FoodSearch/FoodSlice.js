@@ -2,7 +2,8 @@ import useEdamamServices from "../../services/Edamam";
 import {createSlice,createAsyncThunk} from "@reduxjs/toolkit"
 
 const initialState = {
-  data:[]
+  data:[],
+  loading:false
 }
 
 export const searchFood=createAsyncThunk(
@@ -21,8 +22,16 @@ const FoodSlice=createSlice({
   },
   extraReducers:(builder)=>{
     builder
+      .addCase(searchFood.pending,(state,action)=>{
+        state.loading=true;
+      })
       .addCase(searchFood.fulfilled,(state,action)=>{
-        console.log(action.payload)
+        console.log(action.payload.hits)
+        state.data=action.payload.hits
+        state.loading=false;
+      })
+      .addCase(searchFood.rejected,()=>{
+        console.log('error')
       })
   }
 })

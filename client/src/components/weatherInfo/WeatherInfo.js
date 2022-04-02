@@ -35,7 +35,7 @@ const WeatherInfo =()=>{
 }
 const View=({data})=>{
   return(
-    <div className="weatherBlock">
+    <div className="weatherBlock Block">
     <h3>{data.name} ({data.country})</h3> 
     <h4>Date: {data.day}</h4>
     <div>Sunrise: {data.sunrise1}</div>
