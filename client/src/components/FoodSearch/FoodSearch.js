@@ -7,6 +7,8 @@ import Stack from '@mui/material/Stack';
 import { useDispatch, useSelector} from 'react-redux';
 import {searchFood} from './FoodSlice' 
 import FoodItems from '../FoodItems/FoodItems'
+import Button from '@mui/material/Button';
+import Grid from '@mui/material/Grid';
 
 const FoodSearch=()=>{
   const [variables,setVariables]=useState([])
@@ -26,8 +28,11 @@ const FoodSearch=()=>{
   }
 
   return(
+    <>
+    <Grid justifyContent="center" container spacing={2} >
     <div className='Food__Page'>
     <h2 className='Food__Page__Search'>Search Food</h2>
+    <div className='Food__Page__Input'>
     <Stack spacing={2} sx={{ width: 300 }}>
       <Autocomplete
         id="free-solo-demo"
@@ -40,10 +45,19 @@ const FoodSearch=()=>{
       />
      
     </Stack>
-    <button onClick={()=>{dispatch(searchFood(food))}}>Add...</button>
-
-    <FoodItems/>
+    <Button className='Food__Page__Button' onClick={()=>{dispatch(searchFood(food))}} variant="outlined" color="success">
+        Add..
+    </Button>
     </div>
+    
+    
+    </div>
+  </Grid>
+  
+  
+  <FoodItems/>
+  </>
+    
   )
 }
 export default FoodSearch;

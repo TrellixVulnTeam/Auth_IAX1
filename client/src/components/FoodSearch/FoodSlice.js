@@ -1,9 +1,10 @@
 import useEdamamServices from "../../services/Edamam";
-import {createSlice,createAsyncThunk} from "@reduxjs/toolkit"
+import {createSlice,createAsyncThunk,current} from "@reduxjs/toolkit"
 
 const initialState = {
   data:[],
-  loading:false
+  loading:false,
+  favoriteData:[]
 }
 
 export const searchFood=createAsyncThunk(
@@ -18,7 +19,12 @@ const FoodSlice=createSlice({
   name:'food',
   initialState,
   reducers: {
-
+    addFavorite: (state, action) => {
+      state.favoriteData.push(action.payload)
+    },
+    delFavorite:(state,action)=>{
+      state.favoriteData=current(state.favoriteData).filter((item)=>(item.calories!==action.payload.calories))
+    }
   },
   extraReducers:(builder)=>{
     builder
@@ -40,5 +46,6 @@ const {actions, reducer} = FoodSlice;
 export default reducer;
 
 export const {
-  
+  addFavorite,
+  delFavorite
 } = actions;
