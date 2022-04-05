@@ -4,7 +4,9 @@ import {createSlice,createAsyncThunk,current} from "@reduxjs/toolkit"
 const initialState = {
   data:[],
   loading:false,
-  favoriteData:[]
+  favoriteData:[],
+  FoodInfo:{},
+  favorite:false,
 }
 
 export const searchFood=createAsyncThunk(
@@ -24,6 +26,12 @@ const FoodSlice=createSlice({
     },
     delFavorite:(state,action)=>{
       state.favoriteData=current(state.favoriteData).filter((item)=>(item.calories!==action.payload.calories))
+    },
+    getInfoFood:(state,action)=>{
+      state.FoodInfo=action.payload;
+    },
+    changeVariables:(state,action)=>{
+      state.favorite=true
     }
   },
   extraReducers:(builder)=>{
@@ -47,5 +55,7 @@ export default reducer;
 
 export const {
   addFavorite,
-  delFavorite
+  delFavorite,
+  getInfoFood,
+  changeVariables
 } = actions;

@@ -1,0 +1,23 @@
+.Food__Info__Block{
+  border:2px solid black;
+  border-radius: 40px;
+  margin-top: 20px;
+  h2{
+    text-align: center;
+  }
+  p{
+    text-align:center;
+  }
+  padding:20px;
+}
+.Food__Info__Carousel{
+  display:flex;
+  justify-content: center;
+  text-align: center;
+}
+.Food__Info__Health{
+  margin:0 3px;
+}
+.Food__Info__HealthLabels{
+  margin-top:10px;
+}

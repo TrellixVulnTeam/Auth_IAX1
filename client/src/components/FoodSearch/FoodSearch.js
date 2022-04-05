@@ -5,7 +5,7 @@ import Autocomplete from '@mui/material/Autocomplete';
 import TextField from '@mui/material/TextField';
 import Stack from '@mui/material/Stack';
 import { useDispatch, useSelector} from 'react-redux';
-import {searchFood} from './FoodSlice' 
+import {searchFood,changeVariables} from './FoodSlice' 
 import FoodItems from '../FoodItems/FoodItems'
 import Button from '@mui/material/Button';
 import Grid from '@mui/material/Grid';
@@ -15,7 +15,8 @@ const FoodSearch=()=>{
   const {getAutoComplete}=useEdamamServices()
   const [food,setFood]=useState('')
   const dispatch=useDispatch()
-  
+  const {data,favoriteData}=useSelector(store=>store.food)
+
   useEffect(async()=>{
     if(food.length>2) {
       const response= await getAutoComplete(food)
@@ -29,6 +30,7 @@ const FoodSearch=()=>{
 
   return(
     <>
+    <div>Favorite Food</div>
     <Grid justifyContent="center" container spacing={2} >
     <div className='Food__Page'>
     <h2 className='Food__Page__Search'>Search Food</h2>
@@ -46,7 +48,7 @@ const FoodSearch=()=>{
      
     </Stack>
     <Button className='Food__Page__Button' onClick={()=>{dispatch(searchFood(food))}} variant="outlined" color="success">
-        Add..
+        Add
     </Button>
     </div>
     

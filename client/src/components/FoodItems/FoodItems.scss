@@ -1,14 +1,35 @@
-.Food__Item{
-  padding:0 20px;
-  display:block;
-  border:2px solid black;
-  h4{
-    padding:10px 0;
+.Food{
+  &__Item{
+    padding:0 20px;
+    display:block;
+    border:2px solid black;
+    h4{
+      padding:10px 0;
+    }
   }
-}
-.Food__Block{
-  padding:0 20px;
+  &__Block{
+    padding:0 20px;
+  }
+  &__List{
+    display: flex;
+    justify-content: center;
+  }
+  &__Button{
+    
+    color:#47476E;
+    background-color: #fff;
+    border:1px solid #47476E;
+    border-radius: 10px;
+    padding:5px;
+    &:hover{
+      background-color: #1b5e20;
+      color:#fff;
+    }
+  }
+
+  
 }
 .click{
   color: red;
 }
+

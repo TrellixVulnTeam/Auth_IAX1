@@ -9,21 +9,24 @@ import CardContent from '@mui/material/CardContent';
 import CardActions from '@mui/material/CardActions';
 import Avatar from '@mui/material/Avatar';
 import IconButton from '@mui/material/IconButton';
-import { red } from '@mui/material/colors';
+import { grey,green } from '@mui/material/colors';
 import Chip from '@mui/material/Chip';
 import Stack from '@mui/material/Stack';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
-import {addFavorite,delFavorite} from '../FoodSearch/FoodSlice' 
+import {getInfoFood,addFavorite,delFavorite} from '../FoodSearch/FoodSlice' 
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import { useState } from 'react';
+import {Link} from 'react-router-dom';
+import Spinner from 'react-bootstrap/Spinner'
+import FastfoodSharpIcon from '@mui/icons-material/FastfoodSharp';
 
 const FoodList=()=>{
 
 const {data,loading}=useSelector(store=>store.food)
-const content =loading?<div>Загрузка</div>:  <FoodItems  data={data} />;
+const content =loading?<Spinner className='Spinner' animation="border" />:  <FoodItems  data={data} />;
 
   return (
-    <div >
+    <div className='Food__List'>
       {content}    
     </div>
   )
@@ -58,14 +61,14 @@ const FoodItem=(props)=>{
 
   const [like,setLike]=useState(false)
 
-  const but=!like?<FavoriteBorderIcon  />:<FavoriteIcon/>;
+  const but=!like?<FavoriteBorderIcon  />:<FavoriteIcon sx={{ color: grey[900] }}/>;
   const dispatch=useDispatch();
   if (label.length>47) label=props.recipe.label.slice(0,47)+ '...'
 
   const mealType=props.recipe.mealType[0].split('/')
   const meals=mealType.map((item,index)=>{
     return(
-        <Chip key={index} label={item} color="success" variant="outlined" /> 
+        <Chip sx={{ color: grey[900] }} key={index} label={item} color="success" variant="outlined" /> 
     )
   })
   const changeLike=()=>{
@@ -79,22 +82,25 @@ const FoodItem=(props)=>{
      <Card sx={{  width:360}}>
       <CardHeader
         avatar={
-          <Avatar sx={{ bgcolor: red[500] }}  aria-label="recipe">
-            R
+          <Avatar sx={{ bgcolor: grey[900] }}  aria-label="recipe">
+            <FastfoodSharpIcon/>
           </Avatar>
         }
         action={
-          <IconButton aria-label="settings">
-            <p>More</p>
-          </IconButton>
+          
+            <Link style={{'text-decoration':'none'}}  to={`/FoodList/${props.recipe.label}`}>
+                  <button className='Food__Button' onClick={()=>{dispatch(getInfoFood(props.recipe))}}>More</button>
+            </Link>
+          
         }
         title={label}
         subheader={`Number of Calories - ${Math.trunc(props.recipe.calories)}`}
         
       />
       <CardMedia
+        className='Food__Image'
         component="img"
-        height="194"
+        height="200"
         image={props.recipe.images.REGULAR.url}
         alt="Paella dish"
       />
