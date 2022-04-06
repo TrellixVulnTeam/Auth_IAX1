@@ -10,12 +10,16 @@ import FoodItems from '../FoodItems/FoodItems'
 import Button from '@mui/material/Button';
 import Grid from '@mui/material/Grid';
 
+
+
 const FoodSearch=()=>{
   const [variables,setVariables]=useState([])
   const {getAutoComplete}=useEdamamServices()
   const [food,setFood]=useState('')
   const dispatch=useDispatch()
   const {data,favoriteData}=useSelector(store=>store.food)
+
+ 
 
   useEffect(async()=>{
     if(food.length>2) {
@@ -30,7 +34,7 @@ const FoodSearch=()=>{
 
   return(
     <>
-    <div>Favorite Food</div>
+
     <Grid justifyContent="center" container spacing={2} >
     <div className='Food__Page'>
     <h2 className='Food__Page__Search'>Search Food</h2>

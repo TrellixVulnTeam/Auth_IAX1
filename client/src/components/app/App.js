@@ -7,9 +7,9 @@ import WeatherInfo from '../weatherInfo/WeatherInfo';
 import ExchangeValue from '../exchangeValue/ExchangeValue';
 import AppHeader from '../appHeader/AppHeader'
 import MarvelPage from '../pages/MarvelPage'
-import FoodSearch from '../FoodSearch/FoodSearch';
+import FoodPage from '../pages/FoodPage';
 import FoodInfo from '../FoodInfo/FoodInfo';
-
+import FoodFavorites from '../FoodFavorites/FoodFavorites';
 function App() {
  
   return (
@@ -26,8 +26,9 @@ function App() {
         <Route path='/:city' element={<WeatherInfo/>}/>
         <Route path='/exchangeValue' element={<ExchangeValue/>}/>
         <Route path='/marvelPage' element={<MarvelPage/>}/>
-        <Route path='/FoodList' element={<FoodSearch/>}/>
+        <Route path='/FoodList' element={<FoodPage/>}/>
         <Route path='/FoodList/:Food' element={<FoodInfo/>}/>
+        <Route path='/FoodList/FavoriteFood' element={<FoodFavorites/>}/>
       </Routes>
       </div>
     </Router>

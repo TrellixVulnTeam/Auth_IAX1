@@ -18,7 +18,7 @@ const FoodInfo=()=>{
 
   const healthLabels=FoodInfo.healthLabels.map((item,index)=>{
     return(
-      <Chip key={index} className='Food__Info__Health' icon={<HealthAndSafetyIcon/>} key={index} label={item} size="small" color="success"  /> 
+      <Chip key={index} className='Food__Info__Health' icon={<HealthAndSafetyIcon/>} label={item} size="small" color="success"  /> 
     )
   })
   const ingredients=FoodInfo.ingredients.map((item,index)=>{
