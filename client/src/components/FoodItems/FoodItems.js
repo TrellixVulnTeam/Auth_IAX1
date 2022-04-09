@@ -9,7 +9,7 @@ import CardContent from '@mui/material/CardContent';
 import CardActions from '@mui/material/CardActions';
 import Avatar from '@mui/material/Avatar';
 import IconButton from '@mui/material/IconButton';
-import { grey,green } from '@mui/material/colors';
+import { grey } from '@mui/material/colors';
 import Chip from '@mui/material/Chip';
 import Stack from '@mui/material/Stack';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
@@ -22,9 +22,9 @@ import FastfoodSharpIcon from '@mui/icons-material/FastfoodSharp';
 
 const FoodList=()=>{
 
-const {data,loading,favorite,favoriteData}=useSelector(store=>store.food)
-const arr=favorite?favoriteData:data
-const content =loading?<Spinner className='Spinner' animation="border" />:  <FoodItems  data={arr} />;
+const {data,loading}=useSelector(store=>store.food)
+
+const content =loading?<Spinner className='Spinner' animation="border" />:  <FoodItems  data={data} />;
 
   return (
     <div className='Food__List'>
@@ -59,11 +59,11 @@ const FoodItems=({data})=>{
 
 const FoodItem=(props)=>{
   let label=props.recipe.label;
-  const {favorite}=useSelector(store=>store.food)
+
   const [like,setLike]=useState(false)
-  console.log('favorite=',favorite)
+
   let but=!like?<FavoriteBorderIcon  />:<FavoriteIcon sx={{ color: grey[900] }}/>;
-  if (favorite) but=<FavoriteIcon sx={{ color: grey[900] }}/>
+ 
   const dispatch=useDispatch();
   if (label.length>47) label=props.recipe.label.slice(0,47)+ '...'
 
@@ -74,9 +74,10 @@ const FoodItem=(props)=>{
     )
   })
   const changeLike=()=>{
-    console.log('props=',props)
-    if (!like) dispatch(addFavorite(props))
+
+    if (!like ) dispatch(addFavorite(props))
     else dispatch(delFavorite(props.recipe)) 
+    
     setLike(!like)
   }
   return(

@@ -12,11 +12,11 @@ const dispatch=useDispatch()
   <div className='NavBar'>
     <Grid  justifyContent="center" container spacing={2} >
     <NavLink end style={({isActive})=>({color:isActive?'#9f0013':'inherit'})}  to={`/FoodList`}>
-      <SearchIcon/>
+      <SearchIcon onClick={()=>{dispatch(changeVariables())}}/>
     </NavLink> 
         
     <NavLink  style={({isActive})=>({color:isActive?'#9f0013':'inherit'})} to={`/FoodList/FavoriteFood`}>
-       <button onClick={()=>{dispatch(changeVariables())}}><FavoriteBorderIcon/></button>
+       <FavoriteBorderIcon onClick={()=>{dispatch(changeVariables())}} />
     </NavLink>
         
     </Grid>

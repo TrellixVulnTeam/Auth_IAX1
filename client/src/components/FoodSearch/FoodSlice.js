@@ -23,17 +23,27 @@ const FoodSlice=createSlice({
   reducers: {
     addFavorite: (state, action) => {
       state.favoriteData.push(action.payload)
-      localStorage.setItem('favoriteData',current(state.favoriteData));
+      
     },
     delFavorite:(state,action)=>{
-      state.favoriteData=current(state.favoriteData).recipe.filter((item)=>(item.calories!==action.payload.recipe.calories))
-      localStorage.setItem('favoriteData',current(state.favoriteData));
+    
+      const arr=[];
+      for(let i=0;i<current(state.favoriteData).length;i++){
+        if ((current(state.favoriteData[i]).recipe.calories)!==(action.payload.calories)){
+          arr.push(current(state.favoriteData[i]))
+        }
+      }
+      
+      state.favoriteData=arr;
+      // state.favoriteData=current(state.favoriteData).filter((current(item))=>(current(item.recipe.calories)!==action.payload.calories))
+          
     },
     getInfoFood:(state,action)=>{
       state.FoodInfo=action.payload;
     },
     changeVariables:(state,action)=>{
-      state.favorite=true;
+      state.favorite=!state.favorite;
+      
     }
   },
   extraReducers:(builder)=>{

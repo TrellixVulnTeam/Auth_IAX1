@@ -1,13 +1,14 @@
 import './FoodFavorites.scss'
 import FoodHeader from '../FoodHeader/FoodHeader';
-import FoodItems from '../FoodItems/FoodItems'
-const FoodFavorites=()=>{
+import FoodFavoritesList from '../FoodFavoritesItems/FoodFavoritesItems';
 
+
+const FoodFavorites=()=>{
 
   return(
     <>
     <FoodHeader/>
-    <FoodItems/>
+    <FoodFavoritesList/>
     </>
     
   )

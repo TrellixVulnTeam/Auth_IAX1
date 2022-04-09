@@ -1,11 +1,11 @@
-import './WeatherInfo.css'
+import './WeatherInfo.scss'
 import Spinner from 'react-bootstrap/Spinner'
 import { useEffect,useState } from "react";
 import { useParams } from "react-router-dom";
 import { Helmet } from "react-helmet";
 import {weatherInfo} from '../weatherList/WeatherSlice';
 import { useDispatch, useSelector,getState } from 'react-redux';
-
+import Avatar from '@mui/material/Avatar';
 
 const WeatherInfo =()=>{
 
@@ -34,9 +34,18 @@ const WeatherInfo =()=>{
   )
 }
 const View=({data})=>{
+  const flag='https://countryflagsapi.com/png/'+data.country
   return(
     <div className="weatherBlock Block">
-    <h3>{data.name} ({data.country})</h3> 
+    <div className='Header'>
+      <h3>{data.name} ({data.country})</h3>
+      <Avatar
+      alt='Country Flag'
+      src={flag}
+      sx={{ width: 46, height: 46 }}
+        /> 
+    </div>
+  
     <h4>Date: {data.day}</h4>
     <div>Sunrise: {data.sunrise1}</div>
     <div>Sunset: { data.sunset1}</div>

@@ -11,4 +11,12 @@
   .active{
     background-color: #fff;
   }
+  svg{
+    border:1px solid black;
+    border-radius:10px;
+    width:150px;
+    path{
+      margin:105px;
+    }
+  }
 }

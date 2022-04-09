@@ -1,4 +1,4 @@
-import './homePanel.css'
+import './homePanel.scss'
 import {NavLink } from "react-router-dom";
 import Button from 'react-bootstrap/Button'
 
